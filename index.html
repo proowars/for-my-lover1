@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#2d0f3a">
+<meta name="robots" content="noindex, nofollow">
+<title>Для тебя 💖</title>
+<meta property="og:title" content="Для тебя 💖">
+<meta property="og:description" content="Маленький сюрприз. Открой 💝">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Manrope:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#14081c; --bg2:#2d0f3a;
+  --rose:#ff7eb3; --text:#fff1f6; --muted:#d9b8ca;
+  --glass:rgba(255,255,255,.07); --line:rgba(255,255,255,.16);
+  --r:22px;
+}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+html,body{min-height:100%}
+body{
+  font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(1100px 700px at 12% -10%, #5c1a58 0%, transparent 60%),
+    radial-gradient(900px 600px at 100% 100%, #7a2250 0%, transparent 55%),
+    linear-gradient(160deg,var(--bg2),var(--bg1));
+  background-attachment:fixed;
+  overflow-x:hidden;
+}
+#bg,#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+#bg{z-index:0}
+#fx{z-index:80}
+#app{position:relative;z-index:1;min-height:100dvh;display:flex;flex-direction:column;align-items:center;
+  padding:max(18px,env(safe-area-inset-top)) 18px max(40px,env(safe-area-inset-bottom))}
+.screen{width:100%;max-width:560px;animation:in .6s ease both}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fade{to{opacity:1}}
+@keyframes pop{from{opacity:0;transform:scale(.96) translateY(8px)}to{opacity:1;transform:none}}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.12)}30%{transform:scale(1)}45%{transform:scale(1.08)}}
+@keyframes shake{0%,100%{transform:rotate(0)}20%{transform:rotate(-14deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-10deg)}80%{transform:rotate(8deg)}}
+@keyframes nope{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+
+h1,h2{font-family:'Playfair Display',Georgia,serif;font-weight:600}
+h1{font-size:clamp(32px,9vw,42px);line-height:1.15}
+h2{font-size:30px;line-height:1.15}
+.hd{text-align:center;margin:8px 0 20px}
+.sub{color:var(--muted);margin-top:6px;font-family:'Caveat',cursive;font-size:25px}
+.quote{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:clamp(20px,5.2vw,26px);line-height:1.45}
+.muted{color:var(--muted)}
+.foot{text-align:center;margin:26px 0 6px;font-family:'Caveat',cursive;font-size:26px;color:var(--muted)}
+
+.card{background:var(--glass);border:1px solid var(--line);border-radius:var(--r);padding:24px 22px;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 20px 50px -25px rgba(0,0,0,.6)}
+.card+.card{margin-top:14px}
+.center{text-align:center}
+.row{display:flex;justify-content:center;gap:10px;margin-top:20px;flex-wrap:wrap}
+.pop{animation:pop .45s ease both}
+
+.btn{font:inherit;font-weight:700;font-size:16px;color:#3a0f2b;background:linear-gradient(135deg,#ffc2d9,#ff7eb3);
+  border:0;border-radius:999px;padding:14px 26px;cursor:pointer;
+  box-shadow:0 10px 30px -10px rgba(255,90,150,.8);transition:transform .15s,box-shadow .2s}
+.btn:not(.yes):not(.no):active{transform:scale(.96)}
+.btn:hover{box-shadow:0 12px 34px -8px rgba(255,90,150,.95)}
+.btn.ghost{background:var(--glass);color:var(--text);border:1px solid var(--line);box-shadow:none}
+.btn.big{font-size:18px;padding:16px 34px}
+
+.top{display:flex;padding:4px 0 6px}
+.back{background:none;border:0;color:var(--muted);font:inherit;font-size:15px;padding:8px 4px;cursor:pointer}
+.back:hover{color:var(--text)}
+
+/* intro */
+.intro{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:16px;padding:20px 0}
+.intro p{opacity:0;animation:fade 1.1s ease forwards;animation-delay:var(--d);font-size:clamp(18px,5vw,22px);line-height:1.5}
+.intro p.hello{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:clamp(30px,9vw,42px)}
+.intro .btn,.gate{opacity:0;animation:fade 1s ease forwards;animation-delay:var(--d);margin-top:10px}
+.glowheart{font-size:64px;animation:beat 1.6s infinite;filter:drop-shadow(0 0 30px rgba(255,90,150,.8))}
+.gate{display:flex;flex-direction:column;gap:12px;align-items:center;width:100%;max-width:340px}
+.gate input{width:100%;font:inherit;font-size:17px;color:var(--text);text-align:center;background:var(--glass);
+  border:1px solid var(--line);border-radius:999px;padding:14px 18px;outline:none}
+.gate input:focus{border-color:var(--rose)}
+.gate.bad{animation:nope .4s}
+.hintp{color:var(--muted);font-size:14px;min-height:20px}
+
+/* menu */
+.daily small{display:block;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-size:11px;margin-bottom:10px;text-align:center}
+.daily .quote{text-align:center}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.tile{font:inherit;color:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  padding:22px 10px;background:var(--glass);border:1px solid var(--line);border-radius:var(--r);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);cursor:pointer;
+  animation:in .5s both;animation-delay:calc(var(--i) * 60ms);transition:transform .2s,border-color .2s,background .2s}
+.tile:hover{transform:translateY(-3px);border-color:rgba(255,160,200,.55);background:rgba(255,255,255,.1)}
+.tile:active{transform:scale(.97)}
+.tile .em{font-size:36px}
+.tile span:last-child{font-weight:600;font-size:15px}
+.tile:last-child{grid-column:1/-1}
+
+/* ball */
+.ball{font-size:96px;background:none;border:0;cursor:pointer;filter:drop-shadow(0 10px 30px rgba(190,100,255,.6))}
+.ball.shake{animation:shake .7s}
+
+/* letters */
+.stack{display:grid;gap:10px}
+.env{display:flex;align-items:center;gap:14px;text-align:left;font:inherit;font-size:17px;color:inherit;padding:16px 18px;
+  background:var(--glass);border:1px solid var(--line);border-radius:18px;cursor:pointer;transition:transform .2s,border-color .2s}
+.env:hover{transform:translateX(4px);border-color:rgba(255,160,200,.55)}
+.env .e{font-size:26px}
+.paper{background:linear-gradient(160deg,#fff8ee,#ffe6d2);color:#4a2438;border-radius:6px;padding:26px 22px;
+  box-shadow:0 24px 50px -15px rgba(0,0,0,.65);transform:rotate(-.6deg);font-family:'Caveat',cursive;font-size:26px;
+  line-height:1.35;min-height:280px;animation:pop .5s both;cursor:pointer}
+.paper .pl{font-weight:700;color:#b0366b;margin-bottom:12px}
+.paper .pt{white-space:pre-wrap;min-height:130px}
+.paper .sig{text-align:right;margin-top:14px;color:#b0366b}
+
+/* quiz */
+.opts{display:grid;gap:10px;margin-top:18px}
+.opt{font:inherit;font-size:16px;font-weight:600;color:inherit;text-align:left;padding:14px 16px;background:rgba(255,255,255,.06);
+  border:1px solid var(--line);border-radius:16px;cursor:pointer;transition:background .2s,border-color .2s,transform .15s}
+.opt:hover{background:rgba(255,255,255,.11)}
+.opt:active{transform:scale(.98)}
+.opt.right{background:rgba(110,231,160,.22);border-color:#6ee7a0}
+.opt.wrong{background:rgba(255,110,130,.2);border-color:#ff7a8a}
+.fb{min-height:24px;margin-top:14px;text-align:center;font-weight:600}
+.score{font-family:'Playfair Display',serif;font-size:64px;text-align:center;line-height:1}
+
+/* together */
+.units{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.unit{text-align:center;padding:14px 4px;border-radius:16px;background:rgba(255,255,255,.06)}
+.unit b{display:block;font-family:'Playfair Display',serif;font-size:34px;font-variant-numeric:tabular-nums}
+.unit span{font-size:12px;color:var(--muted)}
+.fact{margin:6px 0;line-height:1.5}
+.fact b{color:#ffc2d9}
+
+/* photos */
+.photos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ph{aspect-ratio:1;border:0;border-radius:18px;overflow:hidden;cursor:pointer;padding:0;display:grid;place-items:center;
+  font-size:48px;box-shadow:0 12px 30px -14px rgba(0,0,0,.7);transition:transform .2s}
+.ph:hover{transform:scale(1.03) rotate(-1deg)}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+#lb{position:fixed;inset:0;z-index:100;background:rgba(10,3,16,.93);display:grid;grid-template-columns:auto 1fr auto;
+  grid-template-rows:1fr auto;align-items:center;gap:8px;padding:18px}
+#lb-body{display:grid;place-items:center;min-height:0;height:100%}
+#lb-body img{max-width:100%;max-height:78vh;border-radius:14px}
+.lb-ph{width:min(78vw,420px);aspect-ratio:1;border-radius:20px;display:grid;place-items:center;font-size:110px}
+#lb-cap{grid-column:1/-1;text-align:center;font-family:'Caveat',cursive;font-size:28px;color:#ffd9e8;padding-bottom:10px}
+.lb-nav,.lb-x{background:var(--glass);border:1px solid var(--line);color:#fff;border-radius:50%;width:44px;height:44px;font-size:24px;cursor:pointer}
+.lb-x{position:absolute;top:14px;right:14px}
+
+/* heart */
+.heartzone{display:grid;place-items:center;height:340px;user-select:none;-webkit-user-select:none;touch-action:manipulation;cursor:pointer;position:relative}
+.bigheart{width:min(60vw,250px);filter:drop-shadow(0 10px 40px rgba(255,70,140,.6));animation:beat 1.4s infinite}
+#hmsg{margin-top:18px;min-height:64px}
+
+/* ask */
+.askzone{position:relative;height:230px;margin-top:6px}
+.yes{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(var(--s,1));transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.yes:active{transform:translate(-50%,-50%) scale(var(--s,1))}
+.no{position:absolute;left:calc(50% + 80px);top:50%;transform:translateY(-50%);transition:left .28s ease,top .28s ease,opacity .4s;white-space:nowrap}
+.no:active{transform:var(--nt,translateY(-50%))}
+
+#music{position:fixed;right:16px;bottom:max(16px,env(safe-area-inset-bottom));z-index:60;width:46px;height:46px;border-radius:50%;
+  border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(10px);color:#fff;font-size:20px;cursor:pointer;opacity:.7}
+#music.on{opacity:1;animation:beat 1.4s infinite}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<canvas id="fx"></canvas>
+<main id="app"></main>
+<button id="music" hidden aria-label="Музыка">🎵</button>
+<div id="lb" hidden>
+  <button class="lb-x" aria-label="Закрыть">✕</button>
+  <button class="lb-nav prev" aria-label="Назад">‹</button>
+  <div id="lb-body"></div>
+  <button class="lb-nav next" aria-label="Вперёд">›</button>
+  <p id="lb-cap"></p>
+</div>
+
+<script>
+(() => {
+'use strict';
+
+/* =====================================================================
+   ВСЁ, ЧТО НУЖНО ПОМЕНЯТЬ — ЗДЕСЬ. Чем личнее тексты, тем сильнее эффект.
+   ===================================================================== */
+const CONFIG = {
+  herName: "Солнышко",                 // как ты её называешь
+  yourName: "Твой любимый",            // подпись
+  since: "2026-05-19T20:00:00",        // дата и время, когда вы вместе
+
+  introLines: [
+    "Привет, {name}…",
+    "Я долго думал, как тебя удивить 🥹",
+    "И сделал для тебя маленький мир.",
+    "Только твой. Только для тебя 💖",
+  ],
+
+  // Лёгкая «защита»: вопрос, ответ знаете только вы. Оставь answer пустым, чтобы отключить.
+  // Ответов может быть несколько: answer: ["14 февраля", "14.02"]
+  // Это не настоящая безопасность (код виден в браузере), просто милая «дверца».
+  gate: { question: "", answer: "", hint: "" },
+
+  music: "",                           // например "music/song.mp3" (положи файл рядом). Пусто — без музыки.
+
+  compliments: [
+    "У тебя самая красивая улыбка на свете. Серьёзно, я проверял 😌",
+    "Рядом с тобой даже обычный вторник превращается в праздник ✨",
+    "Ты умеешь делать мир теплее одним своим «привет» ☀️",
+    "Твои глаза — моё любимое место, где можно потеряться 💫",
+    "Ты такая умная, что иногда я просто молча восхищаюсь 🧠💖",
+    "Ты — причина, по которой я улыбаюсь в телефон как дурачок 📱😊",
+    "Ты красивая не только снаружи, но и там, где живёт твоя доброта 🌸",
+    "Если бы красота была валютой, ты была бы самой богатой 👑",
+    "С тобой любое место становится домом 🏡",
+    "Твой смех — лучший звук во вселенной 🎶",
+    "Ты невероятная. И это не комплимент, это факт 📌",
+    "Я до сих пор не понимаю, как мне так повезло 🍀",
+  ],
+
+  reasons: [
+    "за то, как ты морщишь носик, когда смеёшься",
+    "за твою заботу — даже когда ты сама устала",
+    "за то, что рядом с тобой я становлюсь лучше",
+    "за твои тёплые объятия, в которых можно спрятаться от всего мира",
+    "за то, что ты веришь в меня, даже когда я сам сомневаюсь",
+    "за твой голос, который я узнаю из тысячи",
+    "за то, что ты умеешь радоваться мелочам",
+    "за наши глупые шутки, которые понимаем только мы",
+    "за то, что ты — именно ты",
+    "за каждое «я рядом», сказанное в нужный момент",
+    "за твои глаза, когда ты чему-то радуешься",
+    "просто за то, что ты есть",
+  ],
+
+  predictions: [
+    "Сегодня тебя ждёт приятная неожиданность. Возможно, от меня 😏🎁",
+    "Звёзды говорят: тебе срочно нужен поцелуй. Врач-я готов выписать 💋",
+    "Сегодня всё получится с первого раза. Даже если ты сама в это не веришь ✨",
+    "Тебя ждёт вкусный ужин и тёплые объятия. Бронь уже оформлена 🍝",
+    "Сегодня кто-то очень по тебе скучает. Угадай кто? 🙈",
+    "Вселенная приготовила тебе подарок: улыбку в зеркале. Загляни 🪞",
+    "Сегодня идеальный день, чтобы быть любимой. Впрочем, как и всегда 💞",
+  ],
+
+  // «Послание на сегодня» на главной — каждый день новое, по кругу
+  daily: [
+    "Ты — лучшее, что случилось со мной. Просто напоминаю 💖",
+    "Сегодня ты красивее, чем вчера. А вчера было невозможно красиво ✨",
+    "Что бы ни случилось сегодня — ты справишься. А я рядом 🤍",
+    "Если станет тяжело — просто вспомни, как сильно тебя любят.",
+    "Ты заслуживаешь всего самого тёплого и доброго на свете 🌷",
+    "Я думаю о тебе чаще, чем ты думаешь. Проверено 😌",
+    "Улыбнись. Это приказ любящего человека 😊",
+    "Пусть сегодня всё будет так, как хочется тебе 🌙",
+    "Спасибо, что ты есть. Просто за это ❤️",
+    "Ты — мой любимый человек. И точка 💫",
+  ],
+
+  // «Открой, когда…» — label продолжает фразу «Открой, когда …»
+  openWhen: [
+    { emoji: "😢", label: "тебе грустно",
+      text: "Иди сюда, я тебя обнимаю. Крепко-крепко 🤗\n\nГрусть пройдёт, а я останусь. Ты сильнее, чем думаешь, и ты не одна.\n\nЯ люблю тебя 💖" },
+    { emoji: "🥺", label: "ты скучаешь",
+      text: "Я тоже скучаю. Каждую минуту 🥹\n\nЗакрой глаза и представь, что я рядом — обнимаю тебя со спины.\n\nСкоро это станет правдой. Скоро-скоро ✨" },
+    { emoji: "🌙", label: "тебе не спится",
+      text: "Считать овечек скучно. Лучше вспомни наш самый счастливый день 🌌\n\nЯ рядом мыслями. Спокойной ночи, моя хорошая.\n\nПусть тебе приснюсь я 😴💫" },
+    { emoji: "😤", label: "ты злишься на меня",
+      text: "Если ты это читаешь — значит, я накосячил. Прости меня 🥺\n\nДавай обнимемся и всё обсудим? Я принесу чай и шоколадку 🍫" },
+    { emoji: "🥳", label: "тебе радостно",
+      text: "Ураааа!!! Я так рад за тебя 🎉\n\nТы заслуживаешь всего самого лучшего. Давай отметим? Я угощаю 🍰" },
+  ],
+
+  // Викторина про вас. ЗАМЕНИ вопросы на настоящие! answer — номер правильного варианта (с нуля).
+  quiz: [
+    { q: "Когда я первый раз подарил тебе цветы?", options: ["27 февраля", " 19 марта", "30 марта", "4 апреля"], answer: 2 },
+    { q: "Во что мы верим?",     options: ["Отвечаю", "Жопу ставлю", "Правда", "Клянусь"],         answer: 1 },
+    { q: "Что я чаще всего заказываю, когда мы вместе?", options: ["Пиццу", "Суши", "Бургер", "Тебя 😏"], answer: 3 },
+  ],
+
+  noTexts: ["Нет", "Ты уверена? 🤨", "Точно-точно?", "А если подумать?", "Я же расстроюсь 🥺", "Ну пожалуйста 🥹", "Последний шанс 😏"],
+  finalYes: "Я так и знал 😌❤️\n\nА я люблю тебя, {name}, больше, чем можно выразить кодом 💖",
+
+  // Фото: положи файлы в папку photos/ и впиши сюда. Пока пусто — показываются красивые заглушки.
+  // photos: [{ src: "photos/1.jpg", caption: "Наш первый поход" }, ...]
+  photos: [{ src: "photos/BestOne.jpg", caption: "Один из моих любимых моментов с тобой 📸" },
+  { src: "photos/LookAndSmile.jpg", caption: "Смотрю и улыбаюсь 🥹" },
+  { src: "photos/withoutFilters.jpg", caption: "Нашим воспоминаниям не нужен фильтр ✨" },
+  { src: "photos/Happy.jpg", caption: "Здесь мы были счастливы 🌷" },
+  { src: "photos/TiPrekrasna.jpg", caption: "Ты прекрасна на каждом кадре 💖" },
+  { src: "photos/vperedi.jpg", caption: "Ещё много таких впереди 💫" },],
+  photoCaptions: [
+    "Один из моих любимых моментов с тобой 📸",
+    "Смотрю и улыбаюсь 🥹",
+    "Нашим воспоминаниям не нужен фильтр ✨",
+    "Здесь мы были счастливы 🌷",
+    "Ты прекрасна на каждом кадре 💖",
+    "Ещё много таких впереди 💫",
+  ],
+};
+/* ===================== конец настроек ===================== */
+
+const $ = (s, r = document) => r.querySelector(s);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const T = s => String(s).replaceAll('{name}', CONFIG.herName);
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+const plural = (n, f) => { n = Math.abs(n); const a = n % 10, b = n % 100; return b > 10 && b < 20 ? f[2] : a > 1 && a < 5 ? f[1] : a === 1 ? f[0] : f[2]; };
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const lastPick = {};
+function pickIndex(list, key) {
+  let i;
+  do { i = Math.random() * list.length | 0; } while (list.length > 1 && i === lastPick[key]);
+  lastPick[key] = i;
+  return i;
+}
+const pick = (list, key) => list[pickIndex(list, key)];
+
+/* ---------- эффекты: фон и взрывы сердечек ---------- */
+const bg = $('#bg'), fx = $('#fx');
+const bctx = bg.getContext('2d'), fctx = fx.getContext('2d');
+let W = 0, H = 0;
+function resize() {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  W = innerWidth; H = innerHeight;
+  for (const c of [bg, fx]) { c.width = W * dpr; c.height = H * dpr; }
+  bctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  fctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+resize();
+addEventListener('resize', resize);
+
+const GLYPHS = ['♥', '❤', '♡', '✦', '✧'];
+const spawnFloater = init => ({
+  x: Math.random() * W, y: init ? Math.random() * H : H + 20,
+  s: 9 + Math.random() * 20, v: .25 + Math.random() * .6, a: .08 + Math.random() * .24,
+  w: Math.random() * Math.PI * 2, g: GLYPHS[Math.random() * GLYPHS.length | 0],
+});
+const floaters = Array.from({ length: reduce ? 0 : 34 }, () => spawnFloater(true));
+const parts = [];
+
+function burst(x, y, n = 24, glyphs = ['💖', '💗', '💕', '❤️', '✨', '🌸']) {
+  if (reduce) n = Math.ceil(n / 4);
+  for (let i = 0; i < n; i++) {
+    const ang = Math.random() * Math.PI * 2, sp = 2 + Math.random() * 6;
+    parts.push({ x, y, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp - 3, life: 1,
+      s: 16 + Math.random() * 18, g: glyphs[Math.random() * glyphs.length | 0] });
+  }
+}
+
+function frame() {
+  bctx.clearRect(0, 0, W, H);
+  for (const f of floaters) {
+    f.y -= f.v; f.w += .01; f.x += Math.sin(f.w) * .35;
+    if (f.y < -30) Object.assign(f, spawnFloater(false));
+    bctx.font = f.s + 'px serif';
+    bctx.fillStyle = 'rgba(255,160,200,' + f.a + ')';
+    bctx.fillText(f.g, f.x, f.y);
+  }
+  fctx.clearRect(0, 0, W, H);
+  for (let i = parts.length - 1; i >= 0; i--) {
+    const p = parts[i];
+    p.vy += .18; p.x += p.vx; p.y += p.vy; p.vx *= .99; p.life -= .011;
+    if (p.life <= 0) { parts.splice(i, 1); continue; }
+    fctx.globalAlpha = p.life;
+    fctx.font = p.s + 'px serif';
+    fctx.fillText(p.g, p.x, p.y);
+  }
+  fctx.globalAlpha = 1;
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+// мелкие искорки на любое нажатие по кнопкам
+document.addEventListener('pointerdown', e => {
+  if (e.target.closest('.btn,.tile,.opt,.env,.ph')) burst(e.clientX, e.clientY, 6);
+});
+
+/* ---------- печатная машинка ---------- */
+let typeId = 0;
+async function typeInto(el, text, speed = 26) {
+  const id = ++typeId;
+  el.textContent = '';
+  el.dataset.full = text;
+  for (const ch of text) {
+    if (id !== typeId) return;
+    el.textContent += ch;
+    await sleep(speed + (/[.…!?]/.test(ch) ? 160 : ch === ',' ? 70 : ch === '\n' ? 120 : 0));
+  }
+}
+
+/* ---------- музыка ---------- */
+let audio = null;
+const musicBtn = $('#music');
+if (CONFIG.music) {
+  audio = new Audio(CONFIG.music);
+  audio.loop = true;
+  musicBtn.hidden = false;
+  musicBtn.onclick = () => {
+    if (audio.paused) { audio.play().catch(() => {}); musicBtn.classList.add('on'); }
+    else { audio.pause(); musicBtn.classList.remove('on'); }
+  };
+}
+function startMusic() {
+  if (audio && audio.paused) { audio.play().then(() => musicBtn.classList.add('on')).catch(() => {}); }
+}
+
+/* ---------- лайтбокс для фото ---------- */
+const lb = $('#lb'), lbBody = $('#lb-body'), lbCap = $('#lb-cap');
+let lbItems = [], lbI = 0;
+function renderLB() {
+  const it = lbItems[lbI];
+  lbBody.innerHTML = it.src
+    ? '<img src="' + esc(it.src) + '" alt="">'
+    : '<div class="lb-ph" style="background:' + it.bg + '">' + it.emoji + '</div>';
+  lbCap.textContent = it.caption || '';
+}
+function openLB(items, i) { lbItems = items; lbI = i; renderLB(); lb.hidden = false; }
+function closeLB() { lb.hidden = true; }
+lb.addEventListener('click', e => {
+  if (e.target === lb || e.target.closest('.lb-x')) closeLB();
+  else if (e.target.closest('.prev')) { lbI = (lbI - 1 + lbItems.length) % lbItems.length; renderLB(); }
+  else if (e.target.closest('.next')) { lbI = (lbI + 1) % lbItems.length; renderLB(); }
+});
+addEventListener('keydown', e => {
+  if (lb.hidden) return;
+  if (e.key === 'Escape') closeLB();
+  if (e.key === 'ArrowLeft') { lbI = (lbI - 1 + lbItems.length) % lbItems.length; renderLB(); }
+  if (e.key === 'ArrowRight') { lbI = (lbI + 1) % lbItems.length; renderLB(); }
+});
+
+/* ---------- роутер ---------- */
+const app = $('#app');
+let cleanup = null, unlocked = false;
+
+const head = (title, sub = '') =>
+  '<div class="top"><button class="back" data-back>← Меню</button></div>' +
+  '<header class="hd"><h2>' + esc(title) + '</h2>' + (sub ? '<p class="sub">' + esc(sub) + '</p>' : '') + '</header>';
+const wireBack = root => root.querySelectorAll('[data-back]').forEach(b => b.onclick = () => show('menu'));
+
+function show(name, push = true) {
+  if (cleanup) { cleanup(); cleanup = null; }
+  typeId++;
+  closeLB();
+  const root = document.createElement('section');
+  root.className = 'screen';
+  app.replaceChildren(root);
+  const c = (screens[name] || screens.menu)(root);
+  if (typeof c === 'function') cleanup = c;
+  wireBack(root);
+  window.scrollTo(0, 0);
+  if (push) { try { history.pushState({ name }, '', '#' + name); } catch (e) {} }
+}
+addEventListener('popstate', e => { if (unlocked) show((e.state && e.state.name) || 'menu', false); });
+
+/* ---------- экраны ---------- */
+const screens = {
+
+  menu(root) {
+    const now = new Date();
+    const hr = now.getHours();
+    const hi = hr < 5 ? 'Доброй ночи' : hr < 12 ? 'Доброе утро' : hr < 18 ? 'Добрый день' : 'Добрый вечер';
+    const dayN = Math.floor(new Date(now.getFullYear(), now.getMonth(), now.getDate()) / 864e5);
+    const daily = CONFIG.daily[dayN % CONFIG.daily.length];
+    const tiles = [
+      ['compliment', '💌', 'Комплимент'], ['reasons', '🎲', 'За что люблю'],
+      ['predict', '🔮', 'Предсказание'], ['open', '🎁', 'Открой, когда…'],
+      ['quiz', '💞', 'Викторина'], ['together', '⏳', 'Мы вместе'],
+      ['photos', '📸', 'Наши моменты'], ['heart', '💝', 'Сердечко'],
+      ['ask', '🥺', 'Один вопросик'],
+    ];
+    root.innerHTML =
+      '<header class="hd"><h1>' + hi + ',<br>' + esc(CONFIG.herName) + ' 💖</h1><p class="sub">Выбирай, что откроем</p></header>' +
+      '<div class="card daily"><small>Послание на сегодня</small><p class="quote">' + esc(T(daily)) + '</p></div>' +
+      '<div class="grid">' + tiles.map(([k, e, l], i) =>
+        '<button class="tile" data-go="' + k + '" style="--i:' + i + '"><span class="em">' + e + '</span><span>' + l + '</span></button>'
+      ).join('') + '</div>' +
+      '<p class="foot">— ' + esc(CONFIG.yourName) + '</p>';
+    root.querySelectorAll('[data-go]').forEach(b => b.onclick = () => show(b.dataset.go));
+  },
+
+  compliment(root) {
+    root.innerHTML = head('Комплимент', 'Специально для тебя') +
+      '<div class="card center"><p class="quote" id="t"></p>' +
+      '<div class="row"><button class="btn" id="more">Ещё комплимент 💌</button></div></div>';
+    const t = $('#t', root);
+    const next = () => {
+      t.classList.remove('pop'); void t.offsetWidth;
+      t.textContent = pick(CONFIG.compliments, 'c');
+      t.classList.add('pop');
+    };
+    $('#more', root).onclick = next;
+    next();
+  },
+
+  reasons(root) {
+    root.innerHTML = head('За что я тебя люблю', 'Список бесконечный') +
+      '<div class="card center"><p class="muted" id="n"></p><p class="quote" id="t"></p>' +
+      '<div class="row"><button class="btn" id="more">Ещё причину 🎲</button></div></div>';
+    const t = $('#t', root), n = $('#n', root);
+    const next = () => {
+      const i = pickIndex(CONFIG.reasons, 'r');
+      t.classList.remove('pop'); void t.offsetWidth;
+      n.textContent = 'Причина №' + (i + 1);
+      t.textContent = 'Я люблю тебя ' + CONFIG.reasons[i] + ' 💖';
+      t.classList.add('pop');
+    };
+    $('#more', root).onclick = next;
+    next();
+  },
+
+  predict(root) {
+    root.innerHTML = head('Шар предсказаний', 'Загадай желание') +
+      '<div class="card center"><button class="ball" id="ball" aria-label="Шар">🔮</button>' +
+      '<p class="quote muted" id="t" style="min-height:90px;margin-top:10px">Нажми на шар и загадай желание…</p></div>';
+    const ball = $('#ball', root), t = $('#t', root);
+    let busy = false;
+    ball.onclick = async () => {
+      if (busy) return; busy = true;
+      t.classList.remove('muted', 'pop'); t.textContent = '…';
+      ball.classList.add('shake');
+      await sleep(800);
+      ball.classList.remove('shake');
+      void t.offsetWidth;
+      t.textContent = pick(CONFIG.predictions, 'p');
+      t.classList.add('pop');
+      busy = false;
+    };
+  },
+
+  open(root) {
+    const list = () => {
+      typeId++;
+      root.innerHTML = head('Открой, когда…', 'Письма на разные случаи') +
+        '<div class="stack">' + CONFIG.openWhen.map((o, i) =>
+          '<button class="env" data-i="' + i + '"><span class="e">' + o.emoji + '</span><span>' + esc(cap(o.label)) + '</span></button>'
+        ).join('') + '</div>';
+      wireBack(root);
+      root.querySelectorAll('.env').forEach(b => b.onclick = () => letter(+b.dataset.i));
+    };
+    const letter = i => {
+      const o = CONFIG.openWhen[i];
+      root.innerHTML =
+        '<div class="top"><button class="back" id="bk">← Назад</button></div>' +
+        '<div class="paper" id="paper"><p class="pl">Открой, когда ' + esc(o.label) + ' ✉️</p>' +
+        '<p class="pt" id="pt"></p><p class="sig">— ' + esc(CONFIG.yourName) + '</p></div>';
+      $('#bk', root).onclick = list;
+      const pt = $('#pt', root);
+      typeInto(pt, T(o.text), 24);
+      $('#paper', root).onclick = () => { typeId++; pt.textContent = pt.dataset.full || T(o.text); };
+    };
+    list();
+  },
+
+  quiz(root) {
+    let qi = 0, score = 0;
+    const result = () => {
+      const total = CONFIG.quiz.length;
+      const verdict = score === total ? 'Ты знаешь меня лучше всех на свете 🥹💖'
+        : score >= total / 2 ? 'Неплохо! Но нам надо чаще разговаривать… и целоваться 😏'
+        : 'Хм… придётся срочно провести свидание и всё наверстать 😅';
+      root.innerHTML = head('Результат') +
+        '<div class="card center"><p class="score">' + score + ' / ' + total + '</p>' +
+        '<p class="quote" style="margin-top:16px">' + verdict + '</p>' +
+        '<div class="row"><button class="btn" id="again">Ещё раз 💞</button></div></div>';
+      wireBack(root);
+      $('#again', root).onclick = () => { qi = 0; score = 0; render(); };
+      if (score === total) for (let k = 0; k < 5; k++) setTimeout(() => burst(Math.random() * W, H * .35, 22), k * 250);
+    };
+    const render = () => {
+      if (qi >= CONFIG.quiz.length) return result();
+      const q = CONFIG.quiz[qi];
+      let answered = false;
+      root.innerHTML = head('Викторина про нас', 'Вопрос ' + (qi + 1) + ' из ' + CONFIG.quiz.length) +
+        '<div class="card"><p class="quote">' + esc(q.q) + '</p><div class="opts">' +
+        q.options.map((o, i) => '<button class="opt" data-i="' + i + '">' + esc(o) + '</button>').join('') +
+        '</div><p class="fb" id="fb"></p><div class="row"><button class="btn" id="nx" hidden>Дальше →</button></div></div>';
+      wireBack(root);
+      const opts = [...root.querySelectorAll('.opt')];
+      opts.forEach(b => b.onclick = () => {
+        if (answered) return; answered = true;
+        const i = +b.dataset.i, ok = i === q.answer;
+        opts[q.answer].classList.add('right');
+        if (ok) { score++; burst(b.getBoundingClientRect().left + 40, b.getBoundingClientRect().top, 14); }
+        else b.classList.add('wrong');
+        $('#fb', root).textContent = ok ? pick(['Верно! Моя умница 🥰', 'Ты знаешь меня лучше всех 😍'], 'ok')
+                                        : 'Почти! 😘 Правильный ответ подсвечен';
+        const nx = $('#nx', root);
+        nx.textContent = qi === CONFIG.quiz.length - 1 ? 'Результат ✨' : 'Дальше →';
+        nx.hidden = false;
+        nx.onclick = () => { qi++; render(); };
+      });
+    };
+    render();
+  },
+
+  together(root) {
+    const start = new Date(CONFIG.since);
+    root.innerHTML = head('Мы вместе', 'Каждая секунда рядом с тобой') +
+      '<div class="card"><div class="units" id="u"></div></div>' +
+      '<div class="card center" id="facts"></div>';
+    const u = $('#u', root), facts = $('#facts', root);
+
+    const diff = (a, b) => {
+      let y = b.getFullYear() - a.getFullYear(), m = b.getMonth() - a.getMonth(), d = b.getDate() - a.getDate();
+      let h = b.getHours() - a.getHours(), mi = b.getMinutes() - a.getMinutes(), s = b.getSeconds() - a.getSeconds();
+      if (s < 0) { s += 60; mi--; }
+      if (mi < 0) { mi += 60; h--; }
+      if (h < 0) { h += 24; d--; }
+      if (d < 0) { d += new Date(b.getFullYear(), b.getMonth(), 0).getDate(); m--; }
+      if (m < 0) { m += 12; y--; }
+      return { y, m, d, h, mi, s };
+    };
+
+    const tick = () => {
+      const now = new Date();
+      if (now < start) { u.innerHTML = '<p class="center muted" style="grid-column:1/-1">Скоро начнём считать 💞</p>'; return; }
+      const x = diff(start, now);
+      const cells = [
+        [x.y, ['год', 'года', 'лет']], [x.m, ['месяц', 'месяца', 'месяцев']], [x.d, ['день', 'дня', 'дней']],
+        [x.h, ['час', 'часа', 'часов']], [x.mi, ['минута', 'минуты', 'минут']], [x.s, ['секунда', 'секунды', 'секунд']],
+      ];
+      u.innerHTML = cells.map(([v, f]) => '<div class="unit"><b>' + v + '</b><span>' + plural(v, f) + '</span></div>').join('');
+
+      const ms = now - start;
+      const days = Math.floor(ms / 864e5);
+      const beats = Math.floor(ms / 60000 * 70).toLocaleString('ru-RU');
+      let next = new Date(now.getFullYear(), start.getMonth(), start.getDate());
+      const isToday = now.getMonth() === start.getMonth() && now.getDate() === start.getDate();
+      if (next <= now) next.setFullYear(now.getFullYear() + 1);
+      const left = Math.ceil((next - now) / 864e5);
+      facts.innerHTML =
+        '<p class="fact">Это <b>' + days.toLocaleString('ru-RU') + '</b> ' + plural(days, ['день', 'дня', 'дней']) + ' счастья 💞</p>' +
+        '<p class="fact">Моё сердце стукнуло примерно <b>' + beats + '</b> раз с тех пор, как ты в моей жизни 💓</p>' +
+        '<p class="fact">' + (isToday ? '🎉 <b>Сегодня наша годовщина!</b> 🎉'
+          : 'До нашей годовщины: <b>' + left + '</b> ' + plural(left, ['день', 'дня', 'дней']) + ' 🎉') + '</p>';
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  },
+
+  photos(root) {
+    const grads = ['linear-gradient(135deg,#ff9a9e,#fad0c4)', 'linear-gradient(135deg,#a18cd1,#fbc2eb)',
+      'linear-gradient(135deg,#fccb90,#d57eeb)', 'linear-gradient(135deg,#84fab0,#8fd3f4)',
+      'linear-gradient(135deg,#f6d365,#fda085)', 'linear-gradient(135deg,#cfd9df,#e2d1c3)'];
+    const emojis = ['🌅', '☕️', '🌸', '🎬', '🍓', '✨'];
+    const items = CONFIG.photos.length
+      ? CONFIG.photos.map(p => ({ src: p.src, caption: p.caption || '' }))
+      : CONFIG.photoCaptions.slice(0, 6).map((c, i) => ({ emoji: emojis[i % 6], bg: grads[i % 6], caption: c }));
+    root.innerHTML = head('Наши моменты', 'Нажми на фото') +
+      '<div class="photos">' + items.map((it, i) => it.src
+        ? '<button class="ph" data-i="' + i + '"><img src="' + esc(it.src) + '" alt="" loading="lazy"></button>'
+        : '<button class="ph" data-i="' + i + '" style="background:' + it.bg + '">' + it.emoji + '</button>'
+      ).join('') + '</div>';
+    root.querySelectorAll('.ph').forEach(b => b.onclick = () => openLB(items, +b.dataset.i));
+  },
+
+  heart(root) {
+    let count = 0;
+    const msgs = [
+      [1, 'Это раз — «люблю тебя» 💖'], [5, 'Пять раз! Я бы повторял это вечно 🥰'],
+      [10, 'Десять! Моё сердце уже не помещается в груди 💓'], [25, 'Двадцать пять. Ты не остановишься, да? Я не против 😏'],
+      [50, 'Пятьдесят! Каждое нажатие — это «люблю» 💞'], [100, 'Сто! Ты официально любимая. Навсегда 👑'],
+    ];
+    root.innerHTML = head('Сердечко', 'Нажимай, сколько хочется') +
+      '<div class="card center"><div class="heartzone" id="hz">' +
+      '<svg class="bigheart" id="hh" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
+      '<stop offset="0" stop-color="#ff9ac0"/><stop offset="1" stop-color="#ff2d78"/></linearGradient></defs>' +
+      '<path fill="url(#g)" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>' +
+      '</div><p class="quote" id="hmsg">Нажми на сердечко 💖</p></div>';
+    const hz = $('#hz', root), hh = $('#hh', root), hm = $('#hmsg', root);
+    hz.addEventListener('pointerdown', e => {
+      count++;
+      burst(e.clientX, e.clientY, 10);
+      if (hh.animate) hh.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.25)' }, { transform: 'scale(1)' }], { duration: 220 });
+      let m = null;
+      for (const [k, txt] of msgs) if (count >= k) m = txt;
+      hm.textContent = (count === 1 || msgs.some(([k]) => k === count)) && m ? m : 'Уже ' + count + ' — и я бы повторил каждый раз 💖';
+    });
+  },
+
+  ask(root) {
+    let n = 0;
+    root.innerHTML = head('Один вопросик') +
+      '<div class="card center"><p class="quote" id="q">Ты меня любишь? 🥺</p>' +
+      '<div class="askzone" id="zone"><button class="btn yes" id="yes">Да ❤️</button>' +
+      '<button class="btn ghost no" id="no">' + esc(CONFIG.noTexts[0]) + '</button></div></div>';
+    const zone = $('#zone', root), yes = $('#yes', root), no = $('#no', root), q = $('#q', root);
+
+    const overlaps = (a, b) => !(a.right < b.left - 10 || a.left > b.right + 10 || a.bottom < b.top - 10 || a.top > b.bottom + 10);
+    const place = () => {
+      const zr = zone.getBoundingClientRect(), nr = no.getBoundingClientRect(), yr = yes.getBoundingClientRect();
+      const maxX = Math.max(zr.width - nr.width, 0), maxY = Math.max(zr.height - nr.height, 0);
+      let x = 0, y = 0;
+      for (let i = 0; i < 14; i++) {
+        x = Math.random() * maxX; y = Math.random() * maxY;
+        const r = { left: zr.left + x, right: zr.left + x + nr.width, top: zr.top + y, bottom: zr.top + y + nr.height };
+        if (!overlaps(r, yr)) break;
+      }
+      no.style.transform = 'none'; no.style.setProperty('--nt', 'none');
+      no.style.left = x + 'px'; no.style.top = y + 'px';
+    };
+    const evade = () => {
+      n++;
+      yes.style.setProperty('--s', Math.min(1 + n * .17, 2.1));
+      if (n >= CONFIG.noTexts.length) {
+        no.style.opacity = '0'; no.style.pointerEvents = 'none';
+        q.textContent = 'Других вариантов не осталось 😏 Ты меня любишь?';
+        return;
+      }
+      no.textContent = CONFIG.noTexts[n];
+      place();
+    };
+    no.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') evade(); });
+    no.addEventListener('pointerdown', e => { e.preventDefault(); evade(); });
+    no.addEventListener('click', e => e.preventDefault());
+
+    yes.onclick = () => {
+      root.innerHTML = head('Я знал 😌') +
+        '<div class="card center"><p class="quote" style="white-space:pre-wrap">' + esc(T(CONFIG.finalYes)) + '</p>' +
+        '<div class="row"><button class="btn" data-back>В меню 💞</button></div></div>';
+      wireBack(root);
+      for (let k = 0; k < 7; k++) setTimeout(() => burst(Math.random() * W, H * (.2 + Math.random() * .4), 26), k * 220);
+    };
+  },
+};
+
+/* ---------- стартовый экран ---------- */
+function intro() {
+  const root = document.createElement('section');
+  root.className = 'screen intro';
+  app.replaceChildren(root);
+  const lines = CONFIG.introLines.map((l, i) =>
+    '<p class="' + (i === 0 ? 'hello' : '') + '" style="--d:' + (0.6 + i * 1.4) + 's">' + esc(T(l)) + '</p>').join('');
+  const dEnd = 0.6 + CONFIG.introLines.length * 1.4;
+  const gated = !!(CONFIG.gate && CONFIG.gate.answer && String(CONFIG.gate.answer).length);
+
+  root.innerHTML = '<div class="glowheart">💖</div>' + lines + (gated
+    ? '<div class="gate" id="gate" style="--d:' + dEnd + 's"><p style="opacity:1;animation:none;font-size:17px">' + esc(CONFIG.gate.question) + '</p>' +
+      '<input id="gi" autocomplete="off" autocapitalize="off" placeholder="Твой ответ…"><button class="btn" id="go">Войти 💝</button>' +
+      '<p class="hintp" id="gh" style="opacity:1;animation:none;font-size:14px"></p></div>'
+    : '<button class="btn big" id="go" style="--d:' + dEnd + 's">Открыть 💝</button>');
+
+  const enter = (e) => {
+    unlocked = true;
+    if (e) burst(e.clientX || W / 2, e.clientY || H / 2, 30);
+    startMusic();
+    show('menu', false);
+    try { history.replaceState({ name: 'menu' }, '', '#menu'); } catch (err) {}
+  };
+  const norm = s => String(s).trim().toLowerCase().replace(/\s+/g, ' ');
+  $('#go', root).onclick = e => {
+    if (!gated) return enter(e);
+    const ok = [].concat(CONFIG.gate.answer).map(norm).includes(norm($('#gi', root).value));
+    if (ok) return enter(e);
+    const g = $('#gate', root);
+    g.classList.remove('bad'); void g.offsetWidth; g.classList.add('bad');
+    $('#gh', root).textContent = CONFIG.gate.hint || 'Попробуй ещё раз 🙈';
+  };
+  if (gated) $('#gi', root).addEventListener('keydown', e => { if (e.key === 'Enter') $('#go', root).click(); });
+}
+
+intro();
+})();
+</script>
+</body>
+</html>
